@@ -71,22 +71,26 @@ const postData = [
 ];
 
 function Posts() {
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(postData);
 
-  const handleLike = () => {
-    setLikeCount(likeCount + 1);
+  const handleLike = (messageIndex) => {
+    const newLikeCount = [...likeCount];
+    newLikeCount[messageIndex].likes = newLikeCount[messageIndex].likes + 1;
+    setLikeCount(newLikeCount);
   };
 
-  const handleDislike = () => {
-    if (likeCount !== 0) {
-      setLikeCount(likeCount - 1);
+  const handleDislike = (messageIndex) => {
+    const newLikeCount = [...likeCount];
+    if (newLikeCount[messageIndex].likes > 0) {
+      newLikeCount[messageIndex].likes = newLikeCount[messageIndex].likes - 1;
+      setLikeCount(newLikeCount);
     }
   };
 
   return (
     <div class="app-wrapper">
       <h1 class="app-title">Posts</h1>
-      {postData.map((item) => {
+      {postData.map((item, index) => {
         return (
           <div>
             <div class="post-list">
@@ -97,15 +101,25 @@ function Posts() {
                   </h2>
                   <div class="post-social-media-stats">
                     <span class="stats-topic">Likes: </span>
-                    <span class="post-likes">{likeCount}</span>
+                    <span class="post-likes">{item.likes}</span>
                   </div>
                 </div>
                 <p class="post-content">{item.content}</p>
                 <div class="post-actions">
-                  <button class="like-button" onClick={handleLike}>
+                  <button
+                    class="like-button"
+                    onClick={() => {
+                      handleLike(index);
+                    }}
+                  >
                     Like
                   </button>
-                  <button class="dislike-button" onClick={handleDislike}>
+                  <button
+                    class="dislike-button"
+                    onClick={() => {
+                      handleDislike(index);
+                    }}
+                  >
                     Dislike
                   </button>
                 </div>
