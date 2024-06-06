@@ -47,7 +47,7 @@ body {
   border-radius: 10px;
   border: 5px solid var(--secondary-color);
   padding: 40px;
-  width: 50%;
+  width: 700px;
   margin-bottom: 30px;
 }
 
@@ -56,6 +56,10 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.post-title-id {
+  width: 500px;
 }
 
 .post-item .post-content {
